@@ -26,7 +26,11 @@ const MeetingSchema = new mongoose.Schema({
     notes: {
         type: String,
         default: ''
-    }
+    },
+    meetingUrl: {
+        type: String,
+        default: ''
+    },
 }, {
     timestamps: true // Adds createdAt and updatedAt fields
 });

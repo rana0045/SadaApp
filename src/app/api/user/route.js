@@ -24,14 +24,14 @@ export async function GET(req) {
             return NextResponse.json({ error: "Access token not provided" }, { status: 400 });
         }
 
-        let token = await verifyAccessToken(accessToken)
-
+        const token = await verifyAccessToken(accessToken);
 
         if (!token) {
             return NextResponse.json({ error: "Unauthorized access" }, { status: 401 });
         }
 
-        const user = await User.findById(token.id);
+        const user = await User.findById(token.id).populate("sessions").populate("Doc");
+
         if (!user) {
             return NextResponse.json({ error: "User not found" }, { status: 404 });
         }
@@ -42,7 +42,6 @@ export async function GET(req) {
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }
-
 export async function PUT(req) {
     try {
         connectDB()
@@ -70,8 +69,6 @@ export async function PUT(req) {
     }
 }
 
-
-
 export async function DELETE(req) {
     try {
         connectDB()
@@ -96,6 +93,8 @@ export async function DELETE(req) {
         return NextResponse.json({ error: error.message }, { status: 500 })
     }
 }
+
+
 
 
 

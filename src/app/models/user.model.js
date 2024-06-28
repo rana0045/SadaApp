@@ -23,19 +23,16 @@ const UserSchema = new mongoose.Schema({
         {
             type: String,
             default: []
-
         }
     ],
-
-    therapist: {
+    sessions: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Meeting"
+    }],
+    Doc: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Therapist'
-    },
-    meeting: [{
-        type: mongoose.Schema.Types.ObjectId,
-        red: "Meeting"
     }]
-
 }, {
     timestamps: true // Adds createdAt and updatedAt fields
 });
