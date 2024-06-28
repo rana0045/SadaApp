@@ -24,7 +24,7 @@ export async function POST(req) {
         }
 
         // Create a new meeting
-        const newMeeting = new Meeting({
+        const newMeeting = await Meeting.create({
             date,
             time,
             duration,
@@ -33,7 +33,7 @@ export async function POST(req) {
             notes
         });
 
-        await newMeeting.save();
+
 
         // Update the user and therapist models to include the new meeting
         user.sessions.push(newMeeting._id);

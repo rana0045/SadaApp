@@ -27,7 +27,7 @@ const UserSchema = new mongoose.Schema({
     ],
     sessions: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Meetings"
+        ref: "Meeting"
     }],
     Doc: [{
         type: mongoose.Schema.Types.ObjectId,
