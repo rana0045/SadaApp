@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
 
-const UserSchema = new mongoose.Schema({
+const TherapistSchema = new mongoose.Schema({
     fullName: {
         type: String,
         required: true
     },
-    nickName: {
+    specialization: {
         type: String,
         required: true
     },
@@ -14,32 +14,22 @@ const UserSchema = new mongoose.Schema({
         required: true,
         match: [/^\S+@\S+\.\S+$/, 'Please use a valid email address']
     },
-    password: {
+    phone: {
         type: String,
-        required: true,
-        minlength: 6
+        required: true
     },
-    feeling: [
-        {
-            type: String,
-            default: []
-
-        }
-    ],
-
-    therapist: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Therapist'
+    experience: {
+        type: Number,
+        required: true
     },
-    meeting: [{
+    users: [{
         type: mongoose.Schema.Types.ObjectId,
-        red: "Meeting"
+        ref: 'User'
     }]
-
 }, {
     timestamps: true // Adds createdAt and updatedAt fields
 });
 
-const User = mongoose.models.User || mongoose.model('User', UserSchema);
+const Therapist = mongoose.models.Therapist || mongoose.model('Therapist', TherapistSchema);
 
-export default User;
+export default Therapist;
