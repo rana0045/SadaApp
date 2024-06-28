@@ -1,9 +1,8 @@
-// pages/api/therapists/index.js
-import connectDB from "@/utils/dbConnect";
-import Therapist from "@/models/therapist.model";
-import bcrypt from "bcrypt";
+
+import connectDB from "@/DB/connect";
+import Therapist from "@/app/models/therapist.model";
 import { NextResponse } from "next/server";
-import Jwt from "jsonwebtoken";
+
 
 export async function POST(req) {
     try {
@@ -19,27 +18,34 @@ export async function POST(req) {
         }
 
         // Hash the password
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
+
 
         // Create a new therapist
         const newTherapist = new Therapist({
             fullName,
             specialization,
             email,
-            password: hashedPassword
+            phone,
+            experience
         });
 
-        await newTherapist.save();
+        const saveData = await newTherapist.save();
 
-        const response = {
-            fullName: newTherapist.fullName,
-            specialization: newTherapist.specialization,
-            email: newTherapist.email
-        };
 
-        return NextResponse.json({ therapist: response, success: true }, { status: 201 });
+
+        return NextResponse.json({ therapist: saveData, success: true }, { status: 201 });
     } catch (error) {
         return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+}
+
+
+
+export async function GET(req) {
+    try {
+
+    } catch (error) {
+        return NextResponse.json({ error: error.message }, { status: 500 });
+
     }
 }
