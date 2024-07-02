@@ -75,7 +75,7 @@ export async function GET(req) {
             return NextResponse.json({ error: "Unauthorized access" }, { status: 401 });
         }
 
-        const meetings = await Meeting.find({ user: token.id })
+        const meetings = await Meeting.find({ user: token.id }).populate("therapist");
         console.log(meetings);
         return NextResponse.json({ meetings }, { status: 200 });
     } catch (error) {
