@@ -30,7 +30,7 @@ export async function GET(req) {
             return NextResponse.json({ error: "Unauthorized access" }, { status: 401 });
         }
 
-        const user = await User.findById(token.id).populate("Doc");
+        const user = await User.findById(token.id)
 
         if (!user) {
             return NextResponse.json({ error: "User not found" }, { status: 404 });
