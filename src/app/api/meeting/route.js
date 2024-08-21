@@ -20,7 +20,7 @@ export async function POST(req) {
     try {
         await connectDB();
         const reqBody = await req.json();
-        const { date, time, duration, userId, therapistId, notes } = reqBody;
+        const { date, time, duration, userId, therapistId, notes, meetingUrl } = reqBody;
 
         // Validate User and Therapist existence
         const user = await User.findById(userId);
@@ -41,7 +41,8 @@ export async function POST(req) {
             duration,
             user: user._id,
             therapist: therapist._id,
-            notes
+            notes,
+            meetingUrl
         });
 
 
@@ -76,7 +77,7 @@ export async function GET(req) {
         }
 
         const meetings = await Meeting.find({ user: token.id }).populate("therapist");
-        console.log(meetings);
+
         return NextResponse.json({ meetings }, { status: 200 });
     } catch (error) {
         return NextResponse.json({ error: error.message }, { status: 500 });
