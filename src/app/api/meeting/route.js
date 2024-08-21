@@ -64,19 +64,19 @@ export async function GET(req) {
     try {
         await connectDB();
 
-        const accessToken = await req.nextUrl.searchParams.get("accessToken");
+        // const accessToken = await req.nextUrl.searchParams.get("accessToken");
 
-        if (!accessToken) {
-            return NextResponse.json({ error: "Access token not provided" }, { status: 400 });
-        }
+        // if (!accessToken) {
+        //     return NextResponse.json({ error: "Access token not provided" }, { status: 400 });
+        // }
 
-        const token = await verifyAccessToken(accessToken);
+        // const token = await verifyAccessToken(accessToken);
 
-        if (!token) {
-            return NextResponse.json({ error: "Unauthorized access" }, { status: 401 });
-        }
+        // if (!token) {
+        //     return NextResponse.json({ error: "Unauthorized access" }, { status: 401 });
+        // }
 
-        const meetings = await Meeting.find({ user: token.id }).populate("therapist");
+        const meetings = await Meeting.find().populate("therapist");
 
         return NextResponse.json({ meetings }, { status: 200 });
     } catch (error) {
