@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import Jwt from 'jsonwebtoken';
 import connectDB from '@/DB/connect';  // Make sure to use the correct path to your connectDB function
-import User from '@/app/models/user.model';      // Make sure to use the correct path to your User model
+import User from '@/app/models/user.model';      // Make sure to use the correct path to your User mode
 
 const verifyAccessToken = async (accessToken) => {
     try {
@@ -12,8 +12,6 @@ const verifyAccessToken = async (accessToken) => {
         return null
     }
 }
-
-
 
 export async function GET(req) {
     try {
@@ -94,8 +92,3 @@ export async function DELETE(req) {
         return NextResponse.json({ error: error.message }, { status: 500 })
     }
 }
-
-
-
-
-

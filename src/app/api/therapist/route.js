@@ -65,7 +65,13 @@ export async function GET(req) {
 
         // Validate the access token
         if (!accessToken) {
-            return NextResponse.json({ error: "Access token is required" }, { status: 400 });
+            const therapists = await Therapist.find();
+
+            if (!therapists) {
+                return NextResponse.json({ error: "Therapist not found" }, { status: 404 });
+            }
+
+            return NextResponse.json({ therapists: therapists }, { status: 200 });
         }
 
         // Verify the access token

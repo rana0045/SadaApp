@@ -12,6 +12,10 @@ const articleSchema = new mongoose.Schema({
     },
     author: {
         typeof: String,
+    },
+    url: {
+        type: String,
+        required: true
     }
 }, {
     timestamps: true,
