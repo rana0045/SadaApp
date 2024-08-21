@@ -27,7 +27,7 @@ export async function POST(req) {
 
             }, process.env.JWT_SECRET);
 
-        const response = { email: user.email, nickName: user.nickName, fullName: user.fullName }
+        const response = { id: user._id, email: user.email, nickName: user.nickName, fullName: user.fullName }
 
         return NextResponse.json({ User: response, accessToken: accessToken, Success: true }, { status: 200 });
     } catch (error) {
