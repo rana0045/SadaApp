@@ -9,11 +9,11 @@ export async function POST(req) {
     await connectDB();
     try {
         const reqBody = await req.json()
-        const { title, description, author } = reqBody
+        const { title, description, author, url } = reqBody
         if (!title || !description || !author) {
             return NextResponse.json({ message: "all fields required" }, { status: 400 })
         }
-        const article = await Article.create({ title, description, author })
+        const article = await Article.create({ title, description, author, url })
         return NextResponse.json({ message: "article created successfully", article }, { status: 201 })
 
     } catch (error) {
