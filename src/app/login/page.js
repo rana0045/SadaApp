@@ -6,7 +6,7 @@ function page() {
 
     const login = async () => {
         try {
-            const url = "http://192.168.50.17:8000/api/vendor/login"
+            const url = "https://boomhit-production.up.railway.app/api/vendor/login"
             const data = {
                 "email": "anees@anees.com",
                 "password": "123456"
