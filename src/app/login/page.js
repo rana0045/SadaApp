@@ -6,13 +6,15 @@ function page() {
 
     const login = async () => {
         try {
-            const url = "https://boomhit-production.up.railway.app/api/vendor/login"
+            const url = "http://192.168.50.17:8000/api/vendor/login"
             const data = {
                 "email": "anees@anees.com",
                 "password": "123456"
             }
+            const res = await axios.post(url, data, {
+                withCredentials: true
+            });
 
-            const res = await axios.post(url, data)
             console.log(res.data);
         } catch (error) {
             console.log(error.message);
