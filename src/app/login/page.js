@@ -1,29 +1,28 @@
 "use client"
 import axios from 'axios'
 import React, { useEffect } from 'react'
-
+import { io } from 'socket.io-client'
 function page() {
 
-    const login = async () => {
-        try {
-            const url = "https://boomhit-production.up.railway.app/api/vendor/login"
-            const data = {
-                "email": "anees@anees.com",
-                "password": "123456"
-            }
-            const res = await axios.post(url, data, {
-                withCredentials: true
-            });
+    const socket = io('http://192.168.50.17:8000');
 
-            console.log(res.data);
-        } catch (error) {
-            console.log(error.message);
-        }
-    }
+
+    socket.on('connection', (socket) => {
+        console.log(socket);
+    })
+
+
+
+
+
+
+
+
+
 
     return (
         <div>
-            <button onClick={login}>login</button>
+            <button  >login</button>
         </div>
     )
 }
