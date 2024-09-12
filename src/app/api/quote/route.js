@@ -1,24 +1,18 @@
 import { NextResponse } from "next/server";
-import quote from "@/quotes/quote";
-
-function selectRandomQuote(quote) {
-    const timestamp = new Date().getTime(); // Get current timestamp
-    const randomIndex = Math.floor((timestamp % quote.length)); // Use timestamp as seed
-    return quote[randomIndex];
-}
+// import quote from "@/quotes/quote";
+import axios from "axios";
+// function selectRandomQuote(quote) {
+//     const randomIndex = Math.floor(Math.random() * quote.length);
+//     return quote[randomIndex];
+// }
 
 export async function GET() {
     try {
-        const data = selectRandomQuote(quote);
+        const response = await axios.get('https://api.kanye.rest/')
 
-        const response = NextResponse.json({ data }, { status: 200 });
-        response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-        response.headers.set('Pragma', 'no-cache');
-        response.headers.set('Expires', '0');
-        response.headers.set('Surrogate-Control', 'no-store');
-
-        return response;
+        const data = response.data
+        return NextResponse.json({ data }, { status: 200 })
     } catch (error) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        return NextResponse.json({ error: error.message }, { status: 500 })
     }
 }
