@@ -2,7 +2,8 @@ import { NextResponse } from "next/server";
 import quote from "@/quotes/quote";
 
 function selectRandomQuote(quote) {
-    const randomIndex = Math.floor(Math.random() * quote.length);
+    const timestamp = new Date().getTime(); // Get current timestamp
+    const randomIndex = Math.floor((timestamp % quote.length)); // Use timestamp as seed
     return quote[randomIndex];
 }
 
@@ -10,7 +11,6 @@ export async function GET() {
     try {
         const data = selectRandomQuote(quote);
 
-        // Create a response with cache control headers to prevent caching
         const response = NextResponse.json({ data }, { status: 200 });
         response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
         response.headers.set('Pragma', 'no-cache');
